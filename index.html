@@ -46,7 +46,25 @@
             </ol>
         </section>  
       
-        <button id="checkSeatBtn" type="button">Cek Sisa Kursi</button>
+<!-- Komponen Cek Ketersediaan Kursi Pertemuan 7 -->
+<section id="registration" class="registration-card" aria-labelledby="registrationTitle">
+  <h2 id="registrationTitle">Cek Ketersediaan Kursi</h2>
+  <form id="seatForm">
+    <label for="seatRequest">Jumlah kursi yang dibutuhkan</label>
+    <input
+      id="seatRequest"
+      name="seatRequest"
+      type="number"
+      min="1"
+      step="1"
+      required
+    />
+    <button type="submit">Cek Kursi</button>
+  </form>
+  <p id="seatMessage" class="status neutral" aria-live="polite">
+    Masukkan jumlah kursi lalu tekan Cek Kursi.
+  </p>
+</section>
 
         </section id="manfaat">
             <h2>Apa yang Akan Dipelajari?</h2>

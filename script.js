@@ -1,38 +1,51 @@
-// A. Tes Koneksi
-console.log("JavaScript Pertemuan 6 aktif");
+console.log("JavaScript Pertemuan 7 (DOM) aktif");
 
-// C. Variable & State
-const eventName = "TechStarter Day";
+// State & Konstanta
 const maxSeats = 40;
 let registered = 27;
 
-// E. Function Logika Pengecekan Kursi
-function checkSeats(requested) {
-    const remaining = maxSeats - registered;
-    
-    // Validasi Input
-    if (!Number.isInteger(requested) || requested <= 0) {
-        return "Masukkan jumlah kursi berupa bilangan bulat lebih dari 0.";
-    }
-    
-    // Logika Keputusan
-    if (requested <= remaining) {
-        return `Tersedia. Sisa saat ini ${remaining} kursi.`;
-    } else {
-        return `Tidak cukup. Hanya tersisa ${remaining} kursi.`;
+// Selectors DOM
+const seatForm = document.querySelector("#seatForm");
+const seatRequestInput = document.querySelector("#seatRequest");
+const seatMessage = document.querySelector("#seatMessage");
+
+// Helper function untuk mengubah pesan status dan classList
+function setStatus(message, type) {
+    if (seatMessage) {
+        seatMessage.textContent = message;
+        seatMessage.classList.remove("neutral", "success", "error");
+        seatMessage.classList.add(type);
     }
 }
 
-// F. Event Listener untuk Tombol
-const checkSeatBtn = document.querySelector("#checkSeatBtn");
+// Event Submit Form
+if (seatForm) {
+    seatForm.addEventListener("submit", function (event) {
+        // Hentikan reload halaman bawaan form
+        event.preventDefault();
 
-if (checkSeatBtn) {
-    checkSeatBtn.addEventListener("click", function () {
-        const input = prompt("Berapa kursi yang ingin dicek?");
-        const requested = Number(input);
-        const result = checkSeats(requested);
-        
-        console.log(result);
-        alert(result);
+        const rawValue = seatRequestInput.value;
+        const requested = Number(rawValue);
+        const remaining = maxSeats - registered;
+
+        // Validasi angka
+        if (!Number.isInteger(requested) || requested <= 0) {
+            setStatus("Masukkan jumlah kursi berupa bilangan bulat lebih dari 0.", "error");
+            return;
+        }
+
+        // Keputusan sisa kursi
+        if (requested <= remaining) {
+            setStatus(`Tersedia. Masih ada ${remaining} kursi.`, "success");
+        } else {
+            setStatus(`Tidak cukup. Sisa kursi hanya ${remaining}.`, "error");
+        }
+    });
+}
+
+// Event Input untuk mengembalikan status ke netral saat ngetik ulang
+if (seatRequestInput) {
+    seatRequestInput.addEventListener("input", function () {
+        setStatus("Nilai berubah. Tekan Cek Kursi untuk memeriksa.", "neutral");
     });
 }
