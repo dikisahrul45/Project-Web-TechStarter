@@ -107,3 +107,55 @@ section p {
 .note {
     border-left-color: #c07a00;
 }
+
+/* 1. Reset Box Model & Responsive Image */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 2. Fluid Container */
+.container {
+    width: min(100% - 32px, 1100px);
+    margin-inline: auto;
+}
+
+/* 3. Flexbox Navigasi & Card Adaptif */
+.site-nav ul {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.card {
+    flex: 1 1 260px;
+}
+
+/* 4. Media Query Layar Sempit (< 700px) */
+@media (max-width: 700px) {
+    .hero {
+        padding: 32px 0;
+    }
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .hero-actions a {
+        width: 100%;
+        text-align: center;
+    }
+}
